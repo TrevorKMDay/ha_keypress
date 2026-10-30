@@ -1,0 +1,17 @@
+[Unit]
+Description=Send keypresses to Home Assistant
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Change User and the path below if your username isn't "pi"
+User=pi
+SupplementaryGroups=input
+EnvironmentFile=/etc/ha-keypress.env
+ExecStart=/usr/bin/python3 -u /home/pi/ha_keypress.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
